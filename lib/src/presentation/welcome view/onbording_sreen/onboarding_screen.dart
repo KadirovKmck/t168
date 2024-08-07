@@ -20,9 +20,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         duration: const Duration(milliseconds: 300),
         curve: Curves.easeInOut,
       );
-    } else {
-      // Navigation to next screen logic here
-    }
+    } else {}
   }
 
   @override

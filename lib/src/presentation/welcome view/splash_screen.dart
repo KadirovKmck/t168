@@ -10,20 +10,12 @@ class SplashScreen extends StatefulWidget {
   State<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen>
-    with SingleTickerProviderStateMixin {
-  late AnimationController _controller;
-
+class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(
-      duration: const Duration(seconds: 1),
-      vsync: this,
-    )..repeat();
-
     Future.delayed(
-      const Duration(seconds: 5),
+      const Duration(seconds: 6),
       () {
         _checkStatus();
       },
@@ -51,27 +43,31 @@ class _SplashScreenState extends State<SplashScreen>
   }
 
   @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
-      body: Center(
-        child: RotationTransition(
-          turns: _controller,
-          child: Container(
-            decoration: const BoxDecoration(
-                image: DecorationImage(
-              image: AssetImage('assets/images/loading.png'),
-              fit: BoxFit.cover,
-            )),
-            child: const Text('smxbkj'),
+      body: Stack(
+        fit: StackFit.expand,
+        children: [
+          Image.asset(
+            'assets/images/loading.png',
+            fit: BoxFit.cover,
           ),
-        ),
+          Center(
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 16.h,
+                ),
+                const CircularProgressIndicator(
+                  valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                ),
+                SizedBox(height: 2.h),
+                const Text('Loading...', style: TextStyle(color: Colors.white)),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }

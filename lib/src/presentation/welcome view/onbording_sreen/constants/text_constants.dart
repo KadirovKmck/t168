@@ -1,6 +1,12 @@
 class TextConst {
   static final List<Map<String, String>> content = [
     {
+      'title': 'WELCOME ㅤ',
+      'description':
+          'Create strategies, train players, and achieve success on the field',
+      'button': 'CONTINUE'
+    },
+    {
       'title': 'OPTIMIZE YOUR TIME',
       'description':
           'Efficiently plan your tasks and accomplish more in less time',

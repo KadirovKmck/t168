@@ -38,7 +38,7 @@ dependencies:
   responsive_sizer: ^3.3.1
   provider: ^6.1.2
   flutter_svg: ^2.0.10+1
-  images_picker: ^1.2.11
+  image_picker: ^0.8.5+3
   shared_preferences: ^2.3.1
   smooth_page_indicator: ^1.2.0+3
 

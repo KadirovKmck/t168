@@ -134,7 +134,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.2"
-
   flutter_masked_text2:
     dependency: "direct main"
     description:
@@ -143,6 +142,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.9.1"
+  flutter_plugin_android_lifecycle:
+    dependency: transitive
+    description:
+      name: flutter_plugin_android_lifecycle
+      sha256: "9d98bd47ef9d34e803d438f17fd32b116d31009f534a6fa5ce3a1167f189a6de"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.21"
   flutter_slidable:
     dependency: "direct main"
     description:
@@ -151,7 +158,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.1.1"
-
   flutter_svg:
     dependency: "direct main"
     description:

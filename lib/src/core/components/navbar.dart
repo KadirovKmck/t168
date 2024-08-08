@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:t168/src/presentation/main_screens/main_screen.dart';
 import 'package:t168/src/presentation/plan_screen/plan_screen.dart';
+import 'package:t168/src/presentation/profile_screen/profile_screen.dart';
 
 class NavbarView extends StatefulWidget {
   const NavbarView({super.key});
@@ -16,7 +17,7 @@ class _NavbarViewState extends State<NavbarView> {
     const MainScreen(),
     const SizedBox(),
     const PlanScreen(),
-    const PlanScreen(),
+    const ProfileScreen(),
   ];
 
   @override

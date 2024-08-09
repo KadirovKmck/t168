@@ -18,9 +18,6 @@ class CreateTaskContainner extends StatelessWidget {
             width: 80.w,
             height: 42.h,
             child: Column(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text.rich(
                   TextSpan(

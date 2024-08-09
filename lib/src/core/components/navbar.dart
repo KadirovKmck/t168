@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:t168/src/presentation/main_screens/main_screen.dart';
+import 'package:t168/src/presentation/partners_screen/partners_screen.dart';
 import 'package:t168/src/presentation/plan_screen/plan_screen.dart';
 import 'package:t168/src/presentation/profile_screen/profile_screen.dart';
 
@@ -15,7 +16,7 @@ class _NavbarViewState extends State<NavbarView> {
   int _currentIndex = 0;
   final List<Widget> views = [
     const MainScreen(),
-    const SizedBox(),
+    const PartnersScreen(),
     const PlanScreen(),
     const ProfileScreen(),
   ];

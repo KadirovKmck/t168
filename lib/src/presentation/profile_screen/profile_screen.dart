@@ -12,8 +12,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return const ContainerColor(
-        child: Column(
-      children: [],
-    ));
+      child: Column(
+        children: [],
+      ),
+    );
   }
 }

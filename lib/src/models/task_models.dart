@@ -1,6 +1,6 @@
 class TaskModels {
-  final String title;
-  final String description;
+  String title;
+  String description;
   final String date;
   final int priority;
 

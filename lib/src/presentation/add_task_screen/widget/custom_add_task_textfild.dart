@@ -2,17 +2,19 @@ import 'package:flutter/material.dart';
 
 class CustomAddTaskTextField extends StatelessWidget {
   final String label;
+  final  TextInputType? keyboardType;
   final TextEditingController controller;
 
   const CustomAddTaskTextField({
     super.key,
     required this.label,
-    required this.controller,
+    required this.controller, this.keyboardType,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      keyboardType: keyboardType,
       controller: controller,
       decoration: InputDecoration(
         labelText: label,

@@ -6,7 +6,7 @@ import 'package:t168/src/core/components/custom_container.dart';
 import 'package:t168/src/core/components/custom_scaffold.dart';
 import 'package:t168/src/models/task_models.dart';
 import 'package:t168/src/presentation/add_task_screen/widget/custom_add_task_textfild.dart';
-import 'package:t168/src/presentation/add_task_screen/widget/priority_tabbar.dart';
+import 'package:t168/src/presentation/main_screens/widgets/priority_tabbar.dart';
 import 'package:t168/src/presentation/providers/add_task_provider/add_task_provider.dart';
 
 class AddTaskScreen extends StatefulWidget {

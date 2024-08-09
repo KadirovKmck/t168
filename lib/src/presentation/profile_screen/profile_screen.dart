@@ -53,6 +53,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
+
     return ContainerColor(
       child: Column(
         children: [
@@ -175,6 +176,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             height: 2.5.h,
           ),
         ],
+
       ),
     );
   }

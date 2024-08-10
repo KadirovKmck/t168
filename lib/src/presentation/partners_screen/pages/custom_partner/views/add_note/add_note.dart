@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-import 'package:t168/src/app/add_task_screen/widget/custom_add_task_textfild.dart';
+import 'package:t168/src/presentation/add_task_screen/widget/custom_add_task_textfild.dart';
 import 'package:t168/src/core/components/custom_scaffold.dart';
+import 'package:t168/src/models/note_model.dart';
+import 'package:t168/src/models/partners_models.dart';
+import 'package:t168/src/providers/partner_provider/partner_provider.dart';
 
 class AddNote extends StatefulWidget {
-  const AddNote({super.key});
+  const AddNote({super.key, required this.partner});
+  
+  final PartnersModels partner; 
 
   @override
   State<AddNote> createState() => _AddNoteState();
@@ -12,6 +18,19 @@ class AddNote extends StatefulWidget {
 
 class _AddNoteState extends State<AddNote> {
   final TextEditingController noteController = TextEditingController();
+
+  void _saveNote() {
+    if (noteController.text.isNotEmpty) {
+      final newNote = NoteModel(note: noteController.text);
+
+      Provider.of<PartnerProvider>(context, listen: false)
+          .addNoteToPartner(widget.partner, newNote);
+
+      noteController.clear();
+      Navigator.pop(context);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
@@ -49,23 +68,26 @@ class _AddNoteState extends State<AddNote> {
             SizedBox(
               height: 3.h,
             ),
-            Container(
-              width: 90.w,
-              height: 7.5.h,
-              padding: const EdgeInsets.symmetric(horizontal: 24),
-              decoration: const BoxDecoration(
-                color: Color(0xFFC9271E),
-                borderRadius: BorderRadius.all(Radius.circular(8)),
-              ),
-              child: Center(
-                child: Text(
-                  'SAVE',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 16.sp,
-                    fontFamily: 'Poppins',
-                    fontWeight: FontWeight.w700,
+            GestureDetector(
+              onTap: _saveNote,
+              child: Container(
+                width: 90.w,
+                height: 7.5.h,
+                padding: const EdgeInsets.symmetric(horizontal: 24),
+                decoration: const BoxDecoration(
+                  color: Color(0xFFC9271E),
+                  borderRadius: BorderRadius.all(Radius.circular(8)),
+                ),
+                child: Center(
+                  child: Text(
+                    'SAVE',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16.sp,
+                      fontFamily: 'Poppins',
+                      fontWeight: FontWeight.w700,
+                    ),
                   ),
                 ),
               ),

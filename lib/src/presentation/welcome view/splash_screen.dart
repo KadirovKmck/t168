@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:t168/src/core/components/navbar.dart';
-import 'package:t168/src/app/welcome%20view/onbording_sreen/onboarding_screen.dart';
+import 'package:t168/src/presentation/welcome%20view/onbording_sreen/onboarding_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});

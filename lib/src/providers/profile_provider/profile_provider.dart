@@ -6,15 +6,23 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:in_app_review/in_app_review.dart';
 
 class ProfileProvider extends ChangeNotifier {
+  bool _isDarkTheme = false; // Initial theme state
+
+  bool get isDarkTheme => _isDarkTheme;
+
+  void toggleTheme(bool isDark) {
+    _isDarkTheme = isDark;
+    notifyListeners(); // Notify listeners to rebuild widgets
+  }
+
   final NotificationManager _notificationManager = NotificationManager();
+
   final bool _showTextField = true;
-  bool _isDarkTheme = true;
-  bool _isNotificationsEnabled = true;
+  bool _isNotificationsEnabled = false;
   File? _image;
   String _userName = "";
   File? get image => _image;
   String get userName => _userName;
-  bool get isDarkTheme => _isDarkTheme;
   bool get showTextField => _showTextField;
   bool get isNotificationsEnabled => _isNotificationsEnabled;
 
@@ -36,11 +44,6 @@ class ProfileProvider extends ChangeNotifier {
 
   void updateUserName(String name) {
     _userName = name;
-    notifyListeners();
-  }
-
-  void toggleTheme(bool value) {
-    _isDarkTheme = value;
     notifyListeners();
   }
 

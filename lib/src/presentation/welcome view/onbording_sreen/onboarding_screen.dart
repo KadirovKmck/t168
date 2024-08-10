@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import 'package:t168/src/app/welcome%20view/fillin_Information/fillin_Information.dart';
-import 'package:t168/src/app/welcome%20view/onbording_sreen/constants/text_constants.dart';
+import 'package:t168/src/presentation/welcome%20view/fillin_Information/fillin_Information.dart';
+import 'package:t168/src/presentation/welcome%20view/onbording_sreen/constants/text_constants.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
@@ -26,10 +26,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           duration: const Duration(milliseconds: 300), curve: Curves.easeInOut);
     } else {
       Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => FillinInformation(),
-          ));
+        context,
+        MaterialPageRoute(
+          builder: (context) => FillinInformation(),
+        ),
+      );
     }
   }
 

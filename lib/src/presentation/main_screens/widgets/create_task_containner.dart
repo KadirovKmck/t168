@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-import 'package:t168/src/app/add_task_screen/add_task_screen.dart';
+import 'package:t168/src/presentation/add_task_screen/add_task_screen.dart';
 
 class CreateTaskContainner extends StatelessWidget {
   const CreateTaskContainner({
@@ -9,11 +9,16 @@ class CreateTaskContainner extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ThemeData theme = Theme.of(context);
+
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
+          SizedBox(
+            height: 15.h,
+          ),
           SizedBox(
             width: 80.w,
             height: 42.h,
@@ -25,7 +30,8 @@ class CreateTaskContainner extends StatelessWidget {
                       TextSpan(
                         text: 'YOU HAVE NO ',
                         style: TextStyle(
-                          color: Colors.white.withOpacity(0.7),
+                          color:
+                              theme.textTheme.titleLarge?.color ?? Colors.white,
                           fontSize: 16.sp,
                           fontFamily: 'Poppins',
                           fontWeight: FontWeight.w500,
@@ -34,7 +40,8 @@ class CreateTaskContainner extends StatelessWidget {
                       TextSpan(
                         text: 'CURRENT TASKS',
                         style: TextStyle(
-                          color: Colors.white.withOpacity(0.7),
+                          color:
+                              theme.textTheme.titleLarge?.color ?? Colors.white,
                           fontSize: 16.sp,
                           fontFamily: 'Poppins',
                           fontWeight: FontWeight.w900,

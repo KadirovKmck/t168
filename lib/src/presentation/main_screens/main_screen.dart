@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:t168/src/core/components/custom_scaffold.dart';
-import 'package:t168/src/app/add_task_screen/widget/task_list_view.dart';
-import 'package:t168/src/app/main_screens/widgets/container_tasks.dart';
-import 'package:t168/src/app/main_screens/widgets/create_task_containner.dart';
+import 'package:t168/src/presentation/add_task_screen/widget/task_list_view.dart';
+import 'package:t168/src/presentation/main_screens/widgets/container_tasks.dart';
+import 'package:t168/src/presentation/main_screens/widgets/create_task_containner.dart';
 import 'package:t168/src/providers/add_task_provider/add_task_provider.dart';
 
 class MainScreen extends StatefulWidget {
@@ -53,7 +53,10 @@ class _MainScreenState extends State<MainScreen> {
             builder: (context, taskProvider, child) {
               final tasks = taskProvider.tasks;
               if (tasks.isEmpty) {
-                return const CreateTaskContainner();
+                return const Align(
+                  alignment: Alignment.center,
+                  child: CreateTaskContainner(),
+                );
               } else {
                 return Expanded(
                   child: TaskListView(tasks: tasks),

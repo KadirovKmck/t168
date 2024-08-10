@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:t168/src/core/components/custom_scaffold.dart';
-import 'package:t168/src/app/main_screens/widgets/create_task_containner.dart';
-import 'package:t168/src/app/add_task_screen/add_task_screen.dart';
+import 'package:t168/src/presentation/main_screens/widgets/create_task_containner.dart';
+import 'package:t168/src/presentation/add_task_screen/add_task_screen.dart';
 import 'package:t168/src/providers/add_task_provider/add_task_provider.dart';
-import 'package:t168/src/app/add_task_screen/widget/task_list_view.dart';
+import 'package:t168/src/presentation/add_task_screen/widget/task_list_view.dart';
 
 class PlanScreen extends StatefulWidget {
   const PlanScreen({super.key});

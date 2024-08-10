@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:t168/src/core/components/custom_scaffold.dart';
 import 'dart:io';
 
 import 'package:t168/src/models/partners_models.dart';
@@ -39,12 +40,10 @@ class _AddPartnerState extends State<AddPartner> {
 
   Future<void> _selectDate(BuildContext context) async {
     DateTime initialDate = DateTime.now();
-
     showCupertinoModalPopup(
       context: context,
-      builder: (_) => Container(
+      builder: (_) => SizedBox(
         height: 250,
-        color: Colors.white,
         child: Column(
           children: [
             SizedBox(
@@ -95,8 +94,7 @@ class _AddPartnerState extends State<AddPartner> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.black,
+    return CustomScaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xFF272727),
         leading: const SizedBox(),

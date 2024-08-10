@@ -5,8 +5,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:t168/src/core/components/costom_container_color.dart';
-import 'package:t168/src/app/profile_screen/pages/edit_profil.dart';
-import 'package:t168/src/app/profile_screen/pages/feed_back.dart';
+import 'package:t168/src/presentation/main_screens/profile_screen/pages/edit_profil.dart';
+import 'package:t168/src/presentation/main_screens/profile_screen/pages/feed_back.dart';
+import 'package:t168/src/presentation/welcome%20view/loding_screen/loding_screen.dart';
 import 'package:t168/src/providers/profile_provider/profile_provider.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -73,6 +74,7 @@ class ProfileScreen extends StatelessWidget {
                             color: Colors.white,
                             fontSize: 22,
                             fontWeight: FontWeight.w700,
+                            overflow: TextOverflow.ellipsis,
                           ),
                         ),
                         SizedBox(width: 3.w),
@@ -92,7 +94,10 @@ class ProfileScreen extends StatelessWidget {
                 trailing: Switch(
                   value: profileProvider.isDarkTheme,
                   onChanged: (value) {
-                    profileProvider.toggleTheme(value);
+                    profileProvider.toggleTheme(
+                        value); // This should update the provider's theme mode
+                    Provider.of<ThemeProvider>(context, listen: false)
+                        .setTheme(value ? ThemeMode.dark : ThemeMode.light);
                   },
                   activeColor: Colors.red,
                 ),

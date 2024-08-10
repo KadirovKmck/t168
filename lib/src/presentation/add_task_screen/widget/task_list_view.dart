@@ -4,7 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:t168/src/models/task_models.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:t168/src/app/add_task_screen/widget/edit_task.dart';
+import 'package:t168/src/presentation/add_task_screen/widget/edit_task.dart';
 
 class TaskListView extends StatelessWidget {
   final List<TaskModels> tasks;

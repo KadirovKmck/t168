@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:t168/src/core/components/costom_container_color.dart';
-import 'package:t168/src/presentation/main_screens/profile_screen/profile_screen.dart';
+import 'package:t168/src/presentation/profile_screen/profile_screen.dart';
 
 class FeedBack extends StatefulWidget {
   const FeedBack({super.key});
@@ -58,9 +58,7 @@ class _FeedBackState extends State<FeedBack> {
 
     Future.delayed(const Duration(seconds: 3), () {
       Navigator.of(context).pop();
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => const ProfileScreen()),
-      );
+      Navigator.pop(context);
     });
   }
 

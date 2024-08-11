@@ -6,21 +6,13 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:in_app_review/in_app_review.dart';
 
 class ProfileProvider extends ChangeNotifier {
-  bool _isDarkTheme = false; // Initial theme state
-
-  bool get isDarkTheme => _isDarkTheme;
-
-  void toggleTheme(bool isDark) {
-    _isDarkTheme = isDark;
-    notifyListeners(); // Notify listeners to rebuild widgets
-  }
-
   final NotificationManager _notificationManager = NotificationManager();
 
   final bool _showTextField = true;
   bool _isNotificationsEnabled = false;
   File? _image;
   String _userName = "";
+
   File? get image => _image;
   String get userName => _userName;
   bool get showTextField => _showTextField;
@@ -28,29 +20,60 @@ class ProfileProvider extends ChangeNotifier {
 
   final ImagePicker _picker = ImagePicker();
 
+  ProfileProvider() {
+    _loadProfile(); // Load the profile data when the provider is initialized
+  }
+
+  Future<void> _loadProfile() async {
+    final prefs = await SharedPreferences.getInstance();
+    _userName = prefs.getString('userName') ?? "";
+    String? imagePath = prefs.getString('userImage');
+    if (imagePath != null && imagePath.isNotEmpty) {
+      _image = File(imagePath);
+    }
+    _isNotificationsEnabled = prefs.getBool('isNotificationsEnabled') ?? false;
+    notifyListeners();
+  }
+
   Future<void> pickImage() async {
     final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
     if (pickedFile != null) {
       _image = File(pickedFile.path);
+      await saveProfile(); // Save profile whenever the image is picked
       notifyListeners();
     }
   }
 
-  void updateProfile({File? image, String? name}) {
+  Future<void> deleteAllData() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.clear();
+    reset();
+  }
+
+
+  void updateProfile({File? image, String? name}) async {
     if (image != null) _image = image;
     if (name != null) _userName = name;
+    await saveProfile(); // Save profile whenever the data is updated
     notifyListeners();
   }
 
-  void updateUserName(String name) {
+  void updateUserName(String name) async {
     _userName = name;
+    await saveProfile(); // Save profile whenever the username is updated
     notifyListeners();
   }
 
   Future<void> toggleNotifications(bool value) async {
     await _notificationManager.showNotificationAction(value);
     _isNotificationsEnabled = _notificationManager.notificationsEnabled;
+    await _saveNotificationPreference(); // Save notification preference
     notifyListeners();
+  }
+
+  Future<void> _saveNotificationPreference() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('isNotificationsEnabled', _isNotificationsEnabled);
   }
 
   Future<void> rateApp() async {
@@ -61,17 +84,17 @@ class ProfileProvider extends ChangeNotifier {
   }
 
   Future<void> saveProfile() async {
-    if (_userName.isNotEmpty && _image != null) {
-      final prefs = await SharedPreferences.getInstance();
-      await prefs.setString('userName', _userName);
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('userName', _userName);
+    if (_image != null) {
       await prefs.setString('userImage', _image!.path);
-      notifyListeners();
     }
   }
 
-  void reset() {
+  void reset() async {
     _image = null;
     _userName = '';
+    await saveProfile(); // Save profile whenever it is reset
     notifyListeners();
   }
 }
@@ -109,13 +132,9 @@ class NotificationManager {
 
     if (permissionGranted == true) {
       notificationsEnabled = value;
-      // Сохранение состояния в файл или SharedPreferences, если необходимо
     } else {
       notificationsEnabled = false;
       qrlPermissionDeniedOnceYUI = true;
-      // Сохранение состояния отказа в файл или SharedPreferences, если необходимо
     }
   }
-
-  // Дополнительно, можно добавить методы для сохранения и загрузки предпочтений
 }

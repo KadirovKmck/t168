@@ -107,7 +107,6 @@ class _PartnerEditState extends State<PartnerEdit> {
 
   @override
   Widget build(BuildContext context) {
-    
     return CustomScaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xFF272727),
@@ -201,9 +200,30 @@ class _PartnerEditState extends State<PartnerEdit> {
                   },
                 ),
                 SizedBox(height: 2.h),
-                ElevatedButton(
-                  onPressed: _saveInformation,
-                  child: const Text('Save'),
+                GestureDetector(
+                  onTap: _saveInformation,
+                  child: Container(
+                    width: double.infinity,
+                    height: 7.h,
+                    padding: const EdgeInsets.symmetric(horizontal: 24),
+                    decoration: ShapeDecoration(
+                      color: const Color(0xFF5B0604),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(4)),
+                    ),
+                    child: Center(
+                      child: Text(
+                        'SAVE',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 18.sp,
+                          fontFamily: 'Poppins',
+                          fontWeight: FontWeight.w900,
+                        ),
+                      ),
+                    ),
+                  ),
                 ),
               ],
             ),

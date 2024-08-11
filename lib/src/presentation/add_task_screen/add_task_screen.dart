@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_masked_text2/flutter_masked_text2.dart';
 import 'package:provider/provider.dart';
@@ -17,8 +18,7 @@ class AddTaskScreen extends StatefulWidget {
 }
 
 class _AddTaskScreenState extends State<AddTaskScreen> {
-  final MaskedTextController _transactionDateController =
-      MaskedTextController(mask: '00.00.0000');
+  final _transactionDateController = TextEditingController();
   final _descriptionController = TextEditingController();
   final _titleController = TextEditingController();
 
@@ -36,6 +36,37 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
 
     Navigator.pop(
       context,
+    );
+  }
+
+  Future<void> _selectDate(BuildContext context) async {
+    DateTime initialDate = DateTime.now();
+    showCupertinoModalPopup(
+      context: context,
+      builder: (_) => SizedBox(
+        height: 250,
+        child: Column(
+          children: [
+            SizedBox(
+              height: 180,
+              child: CupertinoDatePicker(
+                initialDateTime: initialDate,
+                mode: CupertinoDatePickerMode.date,
+                onDateTimeChanged: (DateTime newDate) {
+                  setState(() {
+                    _transactionDateController.text =
+                        "${newDate.year}-${newDate.month}-${newDate.day}";
+                  });
+                },
+              ),
+            ),
+            CupertinoButton(
+              child: const Text('Done'),
+              onPressed: () => Navigator.of(context).pop(),
+            )
+          ],
+        ),
+      ),
     );
   }
 
@@ -72,8 +103,15 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
           CustomAddTaskTextField(
               label: 'Description', controller: _descriptionController),
           SizedBox(height: 1.h),
-          CustomAddTaskTextField(
-              label: 'Date', controller: _transactionDateController),
+          GestureDetector(
+            onTap: () => _selectDate(context),
+            child: AbsorbPointer(
+              child: CustomAddTaskTextField(
+                controller: _transactionDateController,
+                label: 'Date',
+              ),
+            ),
+          ),
           SizedBox(height: 2.5.h),
           Text(
             'PRIORITY:',

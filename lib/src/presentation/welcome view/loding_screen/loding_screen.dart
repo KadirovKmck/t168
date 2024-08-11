@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:t168/src/core/components/custom_scaffold.dart';
 import 'package:t168/src/core/components/navbar.dart';
 
@@ -57,6 +58,15 @@ class SelektZem extends StatefulWidget {
 }
 
 class _SelektZemState extends State<SelektZem> {
+  Future<void> _saveAndNavigate() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('isSaved', true);
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => const NavbarView()),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
@@ -149,12 +159,7 @@ class _SelektZemState extends State<SelektZem> {
           GestureDetector(
             onTap: () {
               _changeTheme(ThemeMode.system);
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const NavbarView(),
-                ),
-              );
+              _saveAndNavigate();
             },
             child: Container(
               height: 8.h,
@@ -187,11 +192,48 @@ class _SelektZemState extends State<SelektZem> {
 
 class ThemeProvider extends ChangeNotifier {
   ThemeMode _themeMode = ThemeMode.system;
+  bool _isDarkTheme = false;
+
+  ThemeProvider() {
+    _loadThemeFromPrefs(); // Загрузка состояния темы при инициализации
+  }
 
   ThemeMode get themeMode => _themeMode;
 
+  bool get isDarkTheme => _isDarkTheme;
+
+  Future<void> _loadThemeFromPrefs() async {
+    final prefs = await SharedPreferences.getInstance();
+    final savedThemeMode = prefs.getString('themeMode');
+    final savedIsDarkTheme = prefs.getBool('isDarkTheme') ?? true;
+
+    _isDarkTheme = savedIsDarkTheme;
+
+    if (savedThemeMode != null) {
+      _themeMode = ThemeMode.values.firstWhere(
+        (element) => element.toString() == savedThemeMode,
+        orElse: () => ThemeMode.system,
+      );
+    }
+    notifyListeners();
+  }
+
+  Future<void> _saveThemeToPrefs() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('themeMode', _themeMode.toString());
+    await prefs.setBool('isDarkTheme', _isDarkTheme);
+  }
+
   void setTheme(ThemeMode mode) {
     _themeMode = mode;
+    _saveThemeToPrefs();
+    notifyListeners();
+  }
+
+  void toggleTheme(bool isDark) {
+    _isDarkTheme = isDark;
+    _themeMode = isDark ? ThemeMode.dark : ThemeMode.light;
+    _saveThemeToPrefs();
     notifyListeners();
   }
 }

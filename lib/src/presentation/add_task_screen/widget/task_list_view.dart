@@ -1,10 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:t168/src/models/task_models.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:t168/src/presentation/add_task_screen/widget/edit_task.dart';
+import 'package:t168/src/providers/add_task_provider/add_task_provider.dart';
 
 class TaskListView extends StatelessWidget {
   final List<TaskModels> tasks;
@@ -28,34 +30,92 @@ class TaskListView extends StatelessWidget {
             child: Slidable(
               groupTag: tasks,
               endActionPane: ActionPane(
-                motion: const DrawerMotion(),
+                motion: const ScrollMotion(),
                 children: [
-                  SlidableAction(
-                    onPressed: (context) {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => EditTask(
-                            task: task,
+                  SizedBox(
+                    width: 2.5.w,
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      GestureDetector(
+                        onTap: () {},
+                        child: Container(
+                          width: 10.w,
+                          height: 5.h,
+                          decoration: ShapeDecoration(
+                            color: const Color(0xFFC9271E),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(11.0),
+                            child: SvgPicture.asset(
+                              'assets/icons/good.svg',
+                            ),
                           ),
                         ),
-                      );
-                    },
-                    backgroundColor: const Color(0xFF21B7CA),
-                    foregroundColor: Colors.white,
-                    icon: Icons.edit,
-                  ),
-                  SlidableAction(
-                    onPressed: (context) {},
-                    backgroundColor: const Color(0xFF21B7CA),
-                    foregroundColor: Colors.white,
-                    icon: Icons.abc,
-                  ),
-                  SlidableAction(
-                    onPressed: (context) {},
-                    backgroundColor: const Color(0xFF21B7CA),
-                    foregroundColor: Colors.white,
-                    icon: Icons.abc,
+                      ),
+                      SizedBox(
+                        height: 1.h,
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => EditTask(
+                                task: task,
+                              ),
+                            ),
+                          );
+                        },
+                        child: Container(
+                          width: 10.w,
+                          height: 5.h,
+                          decoration: ShapeDecoration(
+                            color: const Color(0xFFFF7A00),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: SvgPicture.asset(
+                              'assets/icons/edit.svg',
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 1.h,
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          // Используем новый метод удаления задачи по индексу
+                          context
+                              .read<AddTaskProvider>()
+                              .removeTaskAtIndex(index);
+                        },
+                        child: Container(
+                          width: 10.w,
+                          height: 5.h,
+                          decoration: ShapeDecoration(
+                            color: const Color(0xFF4D4D4D),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: SvgPicture.asset(
+                              'assets/icons/del.svg',
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),

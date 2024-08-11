@@ -6,9 +6,7 @@ import 'package:t168/src/models/partners_models.dart';
 
 class PartnerProvider extends ChangeNotifier {
   final List<PartnersModels> _partners = [];
-  final List<NoteModel> _notes = [];
 
-  List<NoteModel> get notes => List.unmodifiable(_notes);
   List<PartnersModels> get partners => List.unmodifiable(_partners);
 
   PartnerProvider() {
@@ -42,7 +40,17 @@ class PartnerProvider extends ChangeNotifier {
       );
       _savePartnersToCache();
       notifyListeners();
+    } else {
+      print("Failed to find note or partner");
     }
+    notifyListeners();
+  }
+
+  void deleteAllData() async {
+    _partners.clear();
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.remove('partners');
+    notifyListeners();
   }
 
   void removePartner(int index) {

@@ -39,7 +39,11 @@ class TaskListView extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          context
+                              .read<AddTaskProvider>()
+                              .updateTaskPriority(task, 0);
+                        },
                         child: Container(
                           width: 10.w,
                           height: 5.h,
@@ -93,7 +97,6 @@ class TaskListView extends StatelessWidget {
                       ),
                       GestureDetector(
                         onTap: () {
-                          // Используем новый метод удаления задачи по индексу
                           context
                               .read<AddTaskProvider>()
                               .removeTaskAtIndex(index);

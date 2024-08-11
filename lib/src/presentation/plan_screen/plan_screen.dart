@@ -15,12 +15,6 @@ class PlanScreen extends StatefulWidget {
 }
 
 class _PlanScreenState extends State<PlanScreen> {
-  // @override
-  // void didChangeDependencies() {
-  //   Provider.of<AddTaskProvider>(context, listen: false);
-  //   super.didChangeDependencies();
-  // }
-
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
@@ -54,7 +48,9 @@ class _PlanScreenState extends State<PlanScreen> {
       ),
       body: Consumer<AddTaskProvider>(
         builder: (context, taskProvider, child) {
-          final tasks = taskProvider.tasks;
+          // Filter out completed tasks (priority == 0)
+          final tasks =
+              taskProvider.tasks.where((task) => task.priority != 0).toList();
           if (tasks.isEmpty) {
             return const CreateTaskContainner();
           } else {

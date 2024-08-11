@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 class TaskModels {
   String title;
   String description;
@@ -24,4 +25,19 @@ class TaskModels {
         date: json['date'],
         priority: json['priority'],
       );
+
+
+  TaskModels copyWith({
+    String? title,
+    String? description,
+    String? date,
+    int? priority,
+  }) {
+    return TaskModels(
+      title: title ?? this.title,
+      description: description ?? this.description,
+      date: date ?? this.date,
+      priority: priority ?? this.priority,
+    );
+  }
 }

@@ -15,6 +15,7 @@ class AddTaskProvider extends ChangeNotifier {
   AddTaskProvider() {
     _loadTasksFromCache();
   }
+
   void deleteTask(TaskModels task) {
     _tasks.remove(task);
     _saveTasksToCache();
@@ -27,6 +28,15 @@ class AddTaskProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  void updateTaskPriority(TaskModels task, int newPriority) {
+    int index = _tasks.indexOf(task);
+    if (index != -1) {
+      _tasks[index] = _tasks[index].copyWith(priority: newPriority);
+      _saveTasksToCache();
+      notifyListeners();
+    }
+  }
+
   void updateTask(TaskModels oldTask, TaskModels newTask) {
     int index = _tasks.indexOf(oldTask);
     if (index != -1) {
@@ -35,14 +45,13 @@ class AddTaskProvider extends ChangeNotifier {
       notifyListeners();
     }
   }
-    void removeTaskAtIndex(int index) {
+
+  void removeTaskAtIndex(int index) {
     if (index >= 0 && index < _tasks.length) {
-      _tasks.removeAt(index);
-      _saveTasksToCache();
-      notifyListeners();
+      // Update the task priority to "Canceled"
+      updateTaskPriority(_tasks[index], 2);
     }
   }
-
 
   void _saveTasksToCache() async {
     final prefs = await SharedPreferences.getInstance();

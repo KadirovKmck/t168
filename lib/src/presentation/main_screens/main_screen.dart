@@ -26,7 +26,7 @@ class _MainScreenState extends State<MainScreen> {
             builder: (context, taskProvider, child) {
               return Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
+                children: [ 
                   ContainerTasks(
                     count: taskProvider.completed.toString(),
                     countColor: const Color(0xFF24B621),

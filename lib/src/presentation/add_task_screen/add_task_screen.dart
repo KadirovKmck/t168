@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_masked_text2/flutter_masked_text2.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:t168/src/core/components/custom_container.dart';
@@ -29,7 +28,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
       title: _titleController.text,
       description: _descriptionController.text,
       date: _transactionDateController.text,
-      priority: _selectedPriorityIndex,
+      priority: 1, // Ensure tasks are created with a priority of 1
     );
 
     Provider.of<AddTaskProvider>(context, listen: false).addTask(task);

@@ -132,7 +132,7 @@ class _CostomPartnersState extends State<CostomPartners> {
                           height: 2.h,
                         ),
                         SizedBox(
-                          width: 20.w,
+                          width: 67.w,
                           child: Text(
                             partner.description,
                             style: TextStyle(
@@ -142,6 +142,7 @@ class _CostomPartnersState extends State<CostomPartners> {
                               fontWeight: FontWeight.w500,
                             ),
                             softWrap: true,
+                            overflow: TextOverflow.clip,
                           ),
                         ),
                       ],
@@ -181,13 +182,10 @@ class _CostomPartnersState extends State<CostomPartners> {
                   children: [
                     GestureDetector(
                       onTap: () {
-                        Navigator.push(
+                        Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => AddNote(
-                              partner:
-                                  partner, // Pass the correct partner instance
-                            ),
+                            builder: (context) => AddNote(partner: partner),
                           ),
                         );
                       },
@@ -214,7 +212,7 @@ class _CostomPartnersState extends State<CostomPartners> {
                     ),
                     GestureDetector(
                       onTap: () {
-                        Navigator.push(
+                        Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
                             builder: (context) => PartnerEdit(

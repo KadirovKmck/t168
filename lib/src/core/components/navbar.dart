@@ -3,7 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:t168/src/presentation/main_screens/main_screen.dart';
 import 'package:t168/src/presentation/partners_screen/partners_screen.dart';
 import 'package:t168/src/presentation/plan_screen/plan_screen.dart';
-import 'package:t168/src/presentation/main_screens/profile_screen/profile_screen.dart';
+import 'package:t168/src/presentation/profile_screen/profile_screen.dart';
 
 class NavbarView extends StatefulWidget {
   const NavbarView({super.key});
@@ -59,8 +59,8 @@ class _NavbarViewState extends State<NavbarView> {
               label: '',
             ),
             BottomNavigationBarItem(
-              icon: SvgPicture.asset(
-                'assets/icons/planns.svg',
+              icon: Icon(
+                Icons.person,
                 color: _currentIndex == 3 ? Colors.white : Colors.grey,
               ),
               label: '',

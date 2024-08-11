@@ -35,6 +35,14 @@ class AddTaskProvider extends ChangeNotifier {
       notifyListeners();
     }
   }
+    void removeTaskAtIndex(int index) {
+    if (index >= 0 && index < _tasks.length) {
+      _tasks.removeAt(index);
+      _saveTasksToCache();
+      notifyListeners();
+    }
+  }
+
 
   void _saveTasksToCache() async {
     final prefs = await SharedPreferences.getInstance();
@@ -42,6 +50,13 @@ class AddTaskProvider extends ChangeNotifier {
       _tasks.map((task) => task.toJson()).toList(),
     );
     prefs.setString('tasks', encodedData);
+  }
+
+  void deleteAllData() async {
+    _tasks.clear(); // Очистить список задач
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.remove('tasks'); // Удалить сохранённые задачи
+    notifyListeners();
   }
 
   void _loadTasksFromCache() async {

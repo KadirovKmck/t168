@@ -146,7 +146,6 @@ class PartnerListView extends StatelessWidget {
                             width: 40,
                             height: 40,
                             decoration: BoxDecoration(
-                              shape: BoxShape.circle,
                               image: DecorationImage(
                                 image: partner.photo.isNotEmpty
                                     ? FileImage(File(partner.photo))
@@ -201,9 +200,9 @@ class PartnerListView extends StatelessWidget {
                       const SizedBox(height: 12),
                       Row(
                         children: [
-                          const Text(
-                            '0 Notes',
-                            style: TextStyle(
+                          Text(
+                            '${partner.notes.length}  Notes',
+                            style: const TextStyle(
                               color: Color(0xFF34C565),
                               fontSize: 10,
                               fontWeight: FontWeight.w700,
